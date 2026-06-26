@@ -1,0 +1,8 @@
+# Keep the Cloud Build upload small and the image clean.
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+tests/
+presets/
+pytest.ini

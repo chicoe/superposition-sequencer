@@ -1,0 +1,128 @@
+/*
+ * Visual theme — technical-blueprint / control-panel aesthetic.
+ * Dark teal background, pale mint primary, muted mauve/beige accents.
+ */
+:root {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --bg: #0c1418;
+  --bg-1: #111a1f;       /* panels */
+  --bg-2: #182229;       /* cards / elevated */
+  --bg-3: #1f2a30;       /* inputs, button surfaces */
+
+  /* Foreground */
+  --fg: #cfe1b6;         /* primary text — pale yellow-green */
+  --fg-dim: #8a9a82;     /* secondary text */
+  --fg-mute: #5f6a5d;    /* tertiary / hints */
+
+  /* Accents */
+  --mint: #cfe1b6;       /* main accent — same family as fg */
+  --mint-bright: #e0eec6;
+  --mauve: #a698b0;      /* muted purple */
+  --mauve-dim: #6a5d72;
+  --beige: #c4b896;      /* warm tan */
+  --beige-dim: #7d745c;
+  --steel: #466071;      /* desaturated steel-blue (selected) */
+  --steel-dim: #2c3e4d;
+
+  /* Lines */
+  --border: #2a3a40;     /* primary panel borders */
+  --border-dim: #1c282d; /* low-contrast separators */
+  --grid-dot: #1c2a31;   /* dotted backdrop dots */
+
+  /* Typography */
+  --mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+  --sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+html {
+  /* Always reserve the scrollbar gutter so a vertical scrollbar appearing or
+     disappearing never changes the layout viewport width. Without this, content
+     whose height crosses the viewport right at the 800px breakpoint can toggle
+     the scrollbar, which toggles the matrix-hide media query, which changes the
+     height again — the layout then flip-flops ("resizing back and forth"). */
+  scrollbar-gutter: stable;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--mono);
+  font-size: 13px;
+  min-height: 100vh;
+  letter-spacing: 0.01em;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* Dotted-grid utility for panel interiors. */
+.grid-bg {
+  background-image: radial-gradient(circle, var(--grid-dot) 1px, transparent 1px);
+  background-size: 12px 12px;
+  background-position: 0 0;
+}
+
+/* Bracket corners around a section — pseudo-elements add L-shaped corners. */
+.brackets {
+  position: relative;
+}
+.brackets::before,
+.brackets::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: var(--mint);
+  border-style: solid;
+  pointer-events: none;
+}
+.brackets::before {
+  top: -1px;
+  left: -1px;
+  border-width: 1px 0 0 1px;
+}
+.brackets::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 1px 1px 0;
+}
+
+/* Section header style — small-caps label */
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--fg-dim);
+  font-weight: 500;
+}
+
+/* Buttons & form controls — shared base */
+.ctl {
+  background: var(--bg-3);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 0.3rem 0.55rem;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.75rem;
+}
+.ctl:hover {
+  background: var(--bg-2);
+  border-color: var(--mint-dim, var(--mauve));
+}
+.ctl.active {
+  background: var(--mint);
+  color: var(--bg);
+  border-color: var(--mint);
+}
